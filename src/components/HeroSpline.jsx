@@ -6,7 +6,7 @@ export default function HeroSpline() {
     <section className="relative w-full h-[360px] sm:h-[420px] md:h-[520px] overflow-hidden rounded-b-2xl">
       <div className="absolute inset-0">
         <Spline
-          scene="https://prod.spline.design/6tUXqVcUA0xgJugv/scene.splinecode"
+          scene="https://prod.spline.design/zhZFnwyOYLgqlLWk/scene.splinecode"
           style={{ width: '100%', height: '100%' }}
         />
       </div>
@@ -21,7 +21,7 @@ export default function HeroSpline() {
             Your Coding Journey, Visualized
           </h1>
           <p className="mt-2 text-sm sm:text-base text-white/80 max-w-2xl">
-            A dark, futuristic 3D topographic map guides your progress across skills and time.
+            Tap the interactive grid—watch tiles react with a soft red ripple as you build momentum.
           </p>
         </div>
       </div>

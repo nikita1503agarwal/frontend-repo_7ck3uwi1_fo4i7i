@@ -4,13 +4,16 @@ import ProfileHeader from './components/ProfileHeader';
 import ProgressTracker from './components/ProgressTracker';
 import StudyHeatMap from './components/StudyHeatMap';
 import LanguageProgressBars from './components/LanguageProgressBars';
+import EditProfileModal from './components/EditProfileModal';
 
 export default function App() {
   const [profile, setProfile] = useState({
     name: 'Alex Rivera',
     role: 'Full‑Stack Learner',
     streakDays: 14,
+    avatarUrl: '',
   });
+  const [editing, setEditing] = useState(false);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -21,10 +24,9 @@ export default function App() {
           name={profile.name}
           role={profile.role}
           streakDays={profile.streakDays}
-          onEdit={() => alert('Edit Profile modal will appear here.')}
+          onEdit={() => setEditing(true)}
         />
 
-        {/* Overall progress bar should be ABOVE the heat map per user request */}
         <ProgressTracker overall={66} />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -36,6 +38,13 @@ export default function App() {
           </div>
         </div>
       </main>
+
+      <EditProfileModal
+        open={editing}
+        initial={profile}
+        onClose={() => setEditing(false)}
+        onSave={(data) => setProfile((p) => ({ ...p, ...data }))}
+      />
     </div>
   );
 }
