@@ -1,41 +1,19 @@
 import React from 'react';
-import { CheckCircle2, Clock, Target } from 'lucide-react';
 
-const ProgressTracker = ({ progress = 62, completed = 14, total = 22 }) => {
-  const pct = Math.min(100, Math.max(0, progress));
-  const remaining = Math.max(0, total - completed);
+export default function ProgressTracker({ completed = 32, total = 50 }) {
+  const percent = Math.min(100, Math.round((completed / Math.max(1, total)) * 100));
   return (
-    <section className="w-full rounded-2xl bg-white/70 backdrop-blur border border-gray-200 p-6 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-          <Target className="text-indigo-600" size={20} /> Progress
-        </h2>
-        <span className="text-sm text-gray-500">{completed}/{total} completed</span>
+    <div className="p-5 md:p-6 rounded-2xl bg-white/5 backdrop-blur border border-white/10">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-base md:text-lg font-semibold text-white">Overall Progress</h3>
+        <span className="text-sm text-white/70">{completed}/{total}</span>
       </div>
-
-      <div className="w-full bg-gray-200/70 rounded-full h-3 overflow-hidden">
+      <div className="w-full h-3 rounded-full bg-white/10 overflow-hidden">
         <div
-          className="h-3 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 rounded-full transition-all"
-          style={{ width: `${pct}%` }}
+          className="h-full bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-pink-500"
+          style={{ width: `${percent}%` }}
         />
       </div>
-
-      <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
-        <div className="flex items-center gap-2 text-gray-700">
-          <CheckCircle2 className="text-emerald-600" size={18} />
-          <span>{completed} completed</span>
-        </div>
-        <div className="flex items-center gap-2 text-gray-700">
-          <Clock className="text-amber-600" size={18} />
-          <span>{remaining} remaining</span>
-        </div>
-        <div className="hidden sm:flex items-center gap-2 text-gray-700">
-          <Target className="text-indigo-600" size={18} />
-          <span>{pct}% overall</span>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default ProgressTracker;
+      <p className="mt-2 text-xs text-white/60">{percent}% complete</p>
+    </div>
+  );}

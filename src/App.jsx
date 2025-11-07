@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
+import HeroSpline from './components/HeroSpline';
 import ProfileHeader from './components/ProfileHeader';
 import ProgressTracker from './components/ProgressTracker';
-import StudyHeatMap from './components/StudyHeatMap';
-import ActivityTimeline from './components/ActivityTimeline';
+import LanguageProgressBars from './components/LanguageProgressBars';
 import EditProfileModal from './components/EditProfileModal';
 
-function App() {
+export default function App() {
+  const [openEdit, setOpenEdit] = useState(false);
   const [profile, setProfile] = useState({
     name: 'Alex Johnson',
-    role: 'Full‑Stack Learner',
-    streak: 8,
+    role: 'Full‑Stack Developer',
+    streak: 12,
     avatarUrl: '',
   });
-  const [openEdit, setOpenEdit] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-slate-50 to-violet-50">
-      <div className="mx-auto max-w-6xl px-4 py-10">
-        {/* Page Heading */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">Your Profile</h1>
-          <p className="text-gray-600 mt-1">Track your progress, streaks, and recent activity.</p>
-        </div>
+    <div className="min-h-screen bg-gradient-to-b from-neutral-950 via-neutral-950 to-black text-white">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-10 space-y-6 md:space-y-8">
+        <HeroSpline />
 
-        {/* Profile Header */}
         <ProfileHeader
           name={profile.name}
           role={profile.role}
@@ -32,14 +27,22 @@ function App() {
           onEdit={() => setOpenEdit(true)}
         />
 
-        {/* Main Grid */}
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 space-y-6">
-            <ProgressTracker progress={62} completed={14} total={22} />
-            <StudyHeatMap />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <div className="space-y-5 lg:col-span-2">
+            <ProgressTracker completed={34} total={50} />
+            <LanguageProgressBars />
           </div>
-          <div className="lg:col-span-1">
-            <ActivityTimeline />
+
+          <div className="space-y-5">
+            <div className="p-5 md:p-6 rounded-2xl bg-white/5 backdrop-blur border border-white/10">
+              <h3 className="text-base md:text-lg font-semibold text-white">Recent Activity</h3>
+              <ul className="mt-3 space-y-3 text-sm text-white/80">
+                <li>Completed: Binary Search Trees</li>
+                <li>Attended: Weekly DS&A session</li>
+                <li>Started: React Context deep dive</li>
+                <li>Reviewed: Async patterns in JS</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -48,10 +51,8 @@ function App() {
         open={openEdit}
         initial={profile}
         onClose={() => setOpenEdit(false)}
-        onSave={(updates) => setProfile((p) => ({ ...p, ...updates }))}
+        onSave={(val) => setProfile((p) => ({ ...p, ...val }))}
       />
     </div>
   );
 }
-
-export default App;
