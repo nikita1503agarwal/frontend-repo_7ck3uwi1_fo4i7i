@@ -5,6 +5,7 @@ import ProgressTracker from './components/ProgressTracker';
 import StudyHeatMap from './components/StudyHeatMap';
 import LanguageProgressBars from './components/LanguageProgressBars';
 import EditProfileModal from './components/EditProfileModal';
+import CompletionDonut from './components/CompletionDonut';
 
 export default function App() {
   const [profile, setProfile] = useState({
@@ -14,6 +15,11 @@ export default function App() {
     avatarUrl: '',
   });
   const [editing, setEditing] = useState(false);
+
+  // Example counts used for the donut and stats
+  const solved = 72;
+  const attempted = 21;
+  const unsolved = 9;
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -33,7 +39,8 @@ export default function App() {
           <div className="lg:col-span-2 space-y-6">
             <StudyHeatMap mode="solved" />
           </div>
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 space-y-6">
+            <CompletionDonut solved={solved} attempted={attempted} unsolved={unsolved} />
             <LanguageProgressBars />
           </div>
         </div>
