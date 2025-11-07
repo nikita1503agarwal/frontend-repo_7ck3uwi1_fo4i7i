@@ -30,9 +30,11 @@ export default function App() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
           <div className="space-y-5 lg:col-span-2">
-            <ProgressTracker completed={34} total={50} />
+            {/* Learning progress dashboard first */}
             <StudyHeatMap />
             <LanguageProgressBars />
+            {/* Overall progress bar after learning progress dashboard */}
+            <ProgressTracker completed={34} total={50} />
           </div>
 
           <div className="space-y-5">
