@@ -3,23 +3,25 @@ import Spline from '@splinetool/react-spline';
 
 export default function HeroSpline() {
   return (
-    <section className="relative w-full h-[340px] md:h-[420px] rounded-3xl overflow-hidden border border-white/10 bg-neutral-950">
-      <Spline
-        scene="https://prod.spline.design/igThmltzmqv5hkWo/scene.splinecode"
-        style={{ width: '100%', height: '100%' }}
-      />
+    <section className="relative w-full h-[360px] sm:h-[420px] md:h-[520px] overflow-hidden rounded-b-2xl">
+      <div className="absolute inset-0">
+        <Spline
+          scene="https://prod.spline.design/6tUXqVcUA0xgJugv/scene.splinecode"
+          style={{ width: '100%', height: '100%' }}
+        />
+      </div>
 
-      {/* Soft gradient vignette that won't block interaction */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/40" />
+      {/* Gradient overlays for readability; pointer-events-none so Spline remains interactive */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent" />
 
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="pointer-events-none text-center px-6">
-          <p className="uppercase tracking-[0.3em] text-xs md:text-sm text-white/70">Interactive Loading Animation</p>
-          <h1 className="mt-3 md:mt-4 text-2xl md:text-4xl font-semibold text-white">
-            Learning Progress Dashboard
+      <div className="relative z-10 h-full flex items-end">
+        <div className="px-4 sm:px-6 md:px-10 pb-6 text-white">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
+            Your Coding Journey, Visualized
           </h1>
-          <p className="mt-2 md:mt-3 text-sm md:text-base text-white/70 max-w-xl mx-auto">
-            Minimal, modern, and responsive overview of your coding journey.
+          <p className="mt-2 text-sm sm:text-base text-white/80 max-w-2xl">
+            A dark, futuristic 3D topographic map guides your progress across skills and time.
           </p>
         </div>
       </div>

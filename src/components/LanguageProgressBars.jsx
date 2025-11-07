@@ -1,54 +1,46 @@
 import React from 'react';
 
-const gradients = {
-  javascript: 'from-yellow-400 via-amber-400 to-orange-400',
-  typescript: 'from-sky-400 via-blue-400 to-indigo-400',
-  python: 'from-emerald-400 via-teal-400 to-cyan-400',
-  java: 'from-red-400 via-rose-400 to-pink-400',
-  go: 'from-cyan-400 via-sky-400 to-blue-400',
-  rust: 'from-orange-400 via-amber-500 to-yellow-500',
-  csharp: 'from-violet-400 via-purple-400 to-fuchsia-400',
-};
-
-function LangRow({ label, percent }) {
-  const pct = Math.max(0, Math.min(100, Number(percent) || 0));
-  const key = label?.toLowerCase?.() || '';
-  const grad = gradients[key] || 'from-indigo-400 via-fuchsia-400 to-pink-400';
-
-  return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-white/90">{label}</span>
-        <span className="text-xs text-white/60">{pct}%</span>
-      </div>
-      <div className="h-2.5 w-full rounded-full bg-white/10 overflow-hidden">
-        <div
-          className={`h-full bg-gradient-to-r ${grad}`}
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-    </div>
-  );
+function clampPercent(v) {
+  if (typeof v !== 'number' || Number.isNaN(v)) return 0;
+  return Math.max(0, Math.min(100, v));
 }
 
-export default function LanguageProgressBars({ data }) {
-  const items = data && Array.isArray(data) ? data : [
-    { label: 'JavaScript', percent: 82 },
-    { label: 'TypeScript', percent: 68 },
-    { label: 'Python', percent: 74 },
-    { label: 'Go', percent: 41 },
-  ];
+const gradients = [
+  'from-purple-400 via-fuchsia-400 to-pink-400',
+  'from-emerald-400 via-cyan-400 to-sky-400',
+  'from-amber-400 via-orange-400 to-rose-400',
+  'from-blue-400 via-indigo-400 to-violet-400',
+];
+
+export default function LanguageProgressBars({ items = [] }) {
+  const list = items.length
+    ? items
+    : [
+        { label: 'JavaScript', value: 78 },
+        { label: 'Python', value: 64 },
+        { label: 'TypeScript', value: 52 },
+        { label: 'Rust', value: 28 },
+      ];
 
   return (
-    <div className="p-5 md:p-6 rounded-2xl bg-white/5 backdrop-blur border border-white/10">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-base md:text-lg font-semibold text-white">Language Progress</h3>
-        <span className="text-xs text-white/50">Across recent challenges</span>
-      </div>
-      <div className="space-y-4">
-        {items.map((it) => (
-          <LangRow key={it.label} label={it.label} percent={it.percent} />
-        ))}
+    <div className="w-full bg-white/5 border border-white/10 rounded-xl p-4 sm:p-6">
+      <h3 className="text-white font-semibold">Language Progress</h3>
+      <div className="mt-4 space-y-4">
+        {list.map((item, idx) => {
+          const pct = clampPercent(item.value);
+          const g = gradients[idx % gradients.length];
+          return (
+            <div key={item.label} className="">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-white/80">{item.label}</span>
+                <span className="text-white/60">{pct}%</span>
+              </div>
+              <div className="mt-2 h-2.5 rounded-full bg-white/10 overflow-hidden">
+                <div className={`h-full bg-gradient-to-r ${g}`} style={{ width: `${pct}%` }} />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

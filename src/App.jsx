@@ -2,61 +2,40 @@ import React, { useState } from 'react';
 import HeroSpline from './components/HeroSpline';
 import ProfileHeader from './components/ProfileHeader';
 import ProgressTracker from './components/ProgressTracker';
-import LanguageProgressBars from './components/LanguageProgressBars';
-import EditProfileModal from './components/EditProfileModal';
 import StudyHeatMap from './components/StudyHeatMap';
+import LanguageProgressBars from './components/LanguageProgressBars';
 
 export default function App() {
-  const [openEdit, setOpenEdit] = useState(false);
   const [profile, setProfile] = useState({
-    name: 'Alex Johnson',
-    role: 'Full‑Stack Developer',
-    streak: 12,
-    avatarUrl: '',
+    name: 'Alex Rivera',
+    role: 'Full‑Stack Learner',
+    streakDays: 14,
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-neutral-950 via-neutral-950 to-black text-white">
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-10 space-y-6 md:space-y-8">
-        <HeroSpline />
+    <div className="min-h-screen bg-black text-white">
+      <HeroSpline />
 
+      <main className="mx-auto max-w-6xl px-4 sm:px-6 md:px-10 -mt-12 space-y-6">
         <ProfileHeader
           name={profile.name}
           role={profile.role}
-          streak={profile.streak}
-          avatarUrl={profile.avatarUrl}
-          onEdit={() => setOpenEdit(true)}
+          streakDays={profile.streakDays}
+          onEdit={() => alert('Edit Profile modal will appear here.')}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          <div className="space-y-5 lg:col-span-2">
-            {/* Learning progress dashboard first */}
-            <StudyHeatMap />
-            <LanguageProgressBars />
-            {/* Overall progress bar after learning progress dashboard */}
-            <ProgressTracker completed={34} total={50} />
-          </div>
+        {/* Overall progress bar should be ABOVE the heat map per user request */}
+        <ProgressTracker overall={66} />
 
-          <div className="space-y-5">
-            <div className="p-5 md:p-6 rounded-2xl bg-white/5 backdrop-blur border border-white/10">
-              <h3 className="text-base md:text-lg font-semibold text-white">Recent Activity</h3>
-              <ul className="mt-3 space-y-3 text-sm text-white/80">
-                <li>Completed: Binary Search Trees</li>
-                <li>Attempted: Dynamic Programming (Knapsack)</li>
-                <li>Attended: Weekly DS&A session</li>
-                <li>Reviewed: Async patterns in JS</li>
-              </ul>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-6">
+            <StudyHeatMap mode="solved" />
+          </div>
+          <div className="lg:col-span-1">
+            <LanguageProgressBars />
           </div>
         </div>
-      </div>
-
-      <EditProfileModal
-        open={openEdit}
-        initial={profile}
-        onClose={() => setOpenEdit(false)}
-        onSave={(val) => setProfile((p) => ({ ...p, ...val }))}
-      />
+      </main>
     </div>
   );
 }
