@@ -4,6 +4,7 @@ import ProfileHeader from './components/ProfileHeader';
 import ProgressTracker from './components/ProgressTracker';
 import LanguageProgressBars from './components/LanguageProgressBars';
 import EditProfileModal from './components/EditProfileModal';
+import StudyHeatMap from './components/StudyHeatMap';
 
 export default function App() {
   const [openEdit, setOpenEdit] = useState(false);
@@ -30,6 +31,7 @@ export default function App() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
           <div className="space-y-5 lg:col-span-2">
             <ProgressTracker completed={34} total={50} />
+            <StudyHeatMap />
             <LanguageProgressBars />
           </div>
 
@@ -38,8 +40,8 @@ export default function App() {
               <h3 className="text-base md:text-lg font-semibold text-white">Recent Activity</h3>
               <ul className="mt-3 space-y-3 text-sm text-white/80">
                 <li>Completed: Binary Search Trees</li>
+                <li>Attempted: Dynamic Programming (Knapsack)</li>
                 <li>Attended: Weekly DS&A session</li>
-                <li>Started: React Context deep dive</li>
                 <li>Reviewed: Async patterns in JS</li>
               </ul>
             </div>
