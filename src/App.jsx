@@ -1,7 +1,7 @@
 import React from 'react';
 import ProfileHeader from './components/ProfileHeader';
 import ProgressTracker from './components/ProgressTracker';
-import AchievementBadges from './components/AchievementBadges';
+import StudyHeatMap from './components/StudyHeatMap';
 import ActivityTimeline from './components/ActivityTimeline';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             <ProgressTracker progress={62} completed={14} total={22} />
-            <AchievementBadges />
+            <StudyHeatMap />
           </div>
           <div className="lg:col-span-1">
             <ActivityTimeline />
