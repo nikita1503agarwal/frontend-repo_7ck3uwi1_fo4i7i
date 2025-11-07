@@ -35,13 +35,21 @@ export default function App() {
 
         <ProgressTracker overall={66} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 space-y-6">
+        {/* Layout: Left = Language Bars, Center = Heat Map, Right = Compact Completion Card */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Left side: Language progress */}
+          <div className="lg:col-span-1 order-2 lg:order-1">
+            <LanguageProgressBars />
+          </div>
+
+          {/* Center: Heat map spans 2 columns on large screens */}
+          <div className="lg:col-span-2 order-1 lg:order-2">
             <StudyHeatMap mode="solved" />
           </div>
-          <div className="lg:col-span-1 space-y-6">
+
+          {/* Right side: Compact completion donut */}
+          <div className="lg:col-span-1 order-3">
             <CompletionDonut solved={solved} attempted={attempted} unsolved={unsolved} />
-            <LanguageProgressBars />
           </div>
         </div>
       </main>
